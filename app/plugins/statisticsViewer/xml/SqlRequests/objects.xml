@@ -1,0 +1,197 @@
+<?xml version="1.0" encoding="utf-8"?>
+<statistics>
+    <universe>objects</universe>
+    <statistics_group>
+        <title>Types</title>
+        <statistic>
+            <id>1</id>
+            <title>Object distribution by type</title>
+            <comment>This table/chart displays the number of items inside each type defined in database. Types with no
+                item are not showed.
+            </comment>
+            <sql>select ca_l_i.item_value as "object type", count(*) as "number" from ca_objects ca_o left join
+                ca_list_items ca_l_i on ca_o.type_id=ca_l_i.item_id and ca_l_i.parent_id is not null left join ca_lists
+                ca_l on ca_l.list_id=ca_l_i.list_id where ca_o.deleted = 0 group by ca_l_i.item_id order by 2 desc
+            </sql>
+            <columns>object type,number</columns>
+            <total_columns>number</total_columns>
+            <charting>pie</charting>
+            <charting_columns>object type,number</charting_columns>
+        </statistic>
+    </statistics_group>
+    <statistics_group>
+        <title>Creations</title>
+        <statistic>
+            <id>2</id>
+            <title>Object creation by month this year</title>
+            <comment></comment>
+            <sql>SELECT year(FROM_UNIXTIME(cal.log_datetime)) AS year,monthname(FROM_UNIXTIME(cal.log_datetime)) as
+                month, concat(count(DISTINCT logged_row_id)) as operation FROM `ca_change_log` cal where
+                cal.logged_table_num=57 and changetype="I" and year(NOW()) = year(FROM_UNIXTIME(cal.log_datetime)) GROUP
+                BY year,month ORDER BY year,month(FROM_UNIXTIME(cal.log_datetime))
+            </sql>
+            <columns>year,month,operation</columns>
+            <total_columns>operation</total_columns>
+            <charting>column</charting>
+            <charting_columns>month,operation</charting_columns>
+        </statistic>
+        <statistic>
+            <id>20</id>
+            <title>Object creation in 2013</title>
+            <comment></comment>
+            <sql>SELECT distinct ccls.subject_row_id as objectid FROM ca_change_log_subjects ccls , ca_change_log ccl
+                WHERE ccls.log_id = ccl.log_id and ccls.`subject_table_num` = 57 AND
+                year(FROM_UNIXTIME(ccl.log_datetime)) = 2013 and ccl.changetype = 'I'
+            </sql>
+            <columns>objectid</columns>
+            <total_columns>objectid</total_columns>
+            <charting>pie</charting>
+            <charting_columns>objectid</charting_columns>
+        </statistic>
+        <statistic>
+            <id>21</id>
+            <title>Number of Objects created in 2013</title>
+            <comment></comment>
+            <sql>SELECT count(distinct ccls.subject_row_id) as numberofobjects FROM ca_change_log_subjects ccls ,
+                ca_change_log ccl WHERE ccls.log_id = ccl.log_id and ccls.`subject_table_num` = 57 AND
+                year(FROM_UNIXTIME(ccl.log_datetime)) = 2013 and ccl.changetype = 'I'
+            </sql>
+            <columns>numberofobjects</columns>
+            <total_columns>numberofobjects</total_columns>
+            <charting>column</charting>
+            <charting_columns>month,operation</charting_columns>
+        </statistic>
+        <statistic>
+            <id>22</id>
+            <title>verwerving ingevuld</title>
+            <comment></comment>
+            <sql>SELECT obj.object_id id, obj.idno idno, val1.value_longtext1 Instelling, val2.value_longtext1 Persoon,
+                list1.idno Methode,
+                val4.value_longtext1 Datum, list2.idno huidigeStatusEigenaar,
+                val6.value_longtext1 Opmerking
+                FROM ca_objects obj
+                INNER JOIN ca_attributes AS attr ON obj.object_id = attr.row_id AND attr.table_num = 57
+                INNER JOIN ca_attribute_values AS val1 ON attr.attribute_id = val1.attribute_id AND val1.element_id =
+                138
+                INNER JOIN ca_attribute_values AS val2 ON attr.attribute_id = val2.attribute_id AND val2.element_id =
+                139
+                INNER JOIN ca_attribute_values AS val3 ON attr.attribute_id = val3.attribute_id AND val3.element_id =
+                141
+                INNER JOIN ca_list_items AS list1 ON val3.item_id = list1.item_id
+                INNER JOIN ca_attribute_values AS val4 ON attr.attribute_id = val4.attribute_id AND val4.element_id =
+                143
+                INNER JOIN ca_attribute_values AS val5 ON attr.attribute_id = val5.attribute_id AND val5.element_id =
+                144
+                INNER JOIN ca_list_items AS list2 ON val5.item_id = list2.item_id
+                INNER JOIN ca_attribute_values AS val6 ON attr.attribute_id = val6.attribute_id AND val6.element_id =
+                146
+                WHERE attr.element_id = 136 AND obj.deleted = 0
+            </sql>
+            <columns>id,idno,Instelling,Persoon,Methode,Datum,huidigeStatusEigenaar,Opmerking</columns>
+            <total_columns></total_columns>
+            <charting>column</charting>
+            <charting_columns>month,operation</charting_columns>
+        </statistic>
+        <statistic>
+            <id>23</id>
+            <title>Number of Objects per collection per year (without deleted object)</title>
+            <comment></comment>
+            <sql>SELECT cc.idno as Collectie, year(FROM_UNIXTIME(ccl.log_datetime)) as createdate, count(distinct ccls.subject_row_id) as numberofobjects FROM ca_change_log_subjects ccls , ca_change_log ccl, ca_collections cc, ca_objects_x_collections coa, ca_objects co WHERE ccls.log_id = ccl.log_id and ccls.`subject_table_num` = 57 AND ccl.changetype = 'I' and ccls.subject_row_id = coa.object_id and coa.collection_id = cc.collection_id and coa.object_id = co.object_id and co.deleted = 0 group by cc.idno , year(FROM_UNIXTIME(ccl.log_datetime)) 
+            </sql>
+            <columns>collectie, createdate, numberofobjects</columns>
+            <total_columns>numberofobjects</total_columns>
+            <charting>column</charting>
+            <charting_columns>month,operation</charting_columns>
+        </statistic>
+        <statistic>
+            <id>24</id>
+            <title>Number of Objects per collection (without deleted object)</title>
+            <comment></comment>
+            <sql>SELECT cc.idno as Collectie, count(distinct co.idno) as numberofobjects FROM ca_objects co, ca_collections cc, ca_objects_x_collections coa WHERE co.object_id = coa.object_id and coa.collection_id = cc.collection_id and co.deleted = 0 group by cc.idno 
+            </sql>
+            <columns>collectie, createdate, numberofobjects</columns>
+            <total_columns>numberofobjects</total_columns>
+            <charting>column</charting>
+            <charting_columns>month,operation</charting_columns>
+        </statistic>
+        <statistic>
+            <id>3</id>
+            <title>Object creation by month last year</title>
+            <comment></comment>
+            <sql>SELECT year(FROM_UNIXTIME(cal.log_datetime)) AS year, monthname(FROM_UNIXTIME(cal.log_datetime)) as
+                month, concat(count(DISTINCT logged_row_id)) as creation FROM `ca_change_log` cal where
+                cal.logged_table_num=57 and changetype="I" and year(NOW()) - 1 = year(FROM_UNIXTIME(cal.log_datetime))
+                GROUP BY year,month ORDER BY year,month(FROM_UNIXTIME(cal.log_datetime))
+            </sql>
+            <columns>year,month,creation</columns>
+            <total_columns>creation</total_columns>
+            <charting>column</charting>
+            <charting_columns>month,creation</charting_columns>
+        </statistic>
+    </statistics_group>
+    <statistics_group>
+        <title>Access and status</title>
+        <statistic>
+            <id>4</id>
+            <title>Objects by status</title>
+            <comment></comment>
+            <sql>SELECT ca_li.idno as Status, count(ca_o.object_id) as Number FROM ca_objects ca_o LEFT JOIN
+                ca_list_items ca_li ON ca_li.item_value = ca_o.status LEFT JOIN ca_lists ca_l ON
+                ca_li.list_id=ca_l.list_id WHERE ca_l.list_code='workflow_statuses' and ca_li.item_value!="Root" and
+                ca_o.deleted = 0 group by ca_li.item_value
+            </sql>
+            <columns>Status,Number</columns>
+            <total_columns>Number</total_columns>
+            <charting>column</charting>
+            <charting_columns>Status,Number</charting_columns>
+        </statistic>
+        <statistic>
+            <id>5</id>
+            <title>Objects by access</title>
+            <comment></comment>
+            <sql>SELECT ca_li.idno as Access, count(ca_o.object_id) as Number FROM ca_objects ca_o LEFT JOIN
+                ca_list_items ca_li ON ca_li.item_value = ca_o.access LEFT JOIN ca_lists ca_l ON
+                ca_li.list_id=ca_l.list_id WHERE ca_l.list_code='access_statuses' and ca_li.item_value!="Root" and
+                ca_o.deleted = 0 group by ca_li.item_value
+            </sql>
+            <columns>Access,Number</columns>
+            <total_columns>Number</total_columns>
+            <charting>column</charting>
+            <charting_columns>Access,Number</charting_columns>
+        </statistic>
+    </statistics_group>
+    <statistics_group>
+        <title>Deleted objects</title>
+        <statistic>
+            <id>6</id>
+            <title>Objects deleted</title>
+            <comment></comment>
+            <sql>SELECT IF(deleted>0,"yes","no") as "Deleted", count(object_id) as Number FROM ca_objects GROUP BY
+                deleted
+            </sql>
+            <columns>Deleted,Number</columns>
+            <total_columns>Number</total_columns>
+            <charting>column</charting>
+            <charting_columns>Deleted,Number</charting_columns>
+        </statistic>
+    </statistics_group>
+    <statistics_group>
+        <title>Object Relationships</title>
+        <statistic>
+            <id>7</id>
+            <title>Objects without collection</title>
+            <comment></comment>
+            <sql>SELECT obj.object_id as "Object_id", idno as "Idno", name as "Object_naam" FROM ca_objects obj
+                INNER JOIN ca_object_labels AS lab ON obj.object_id = lab.object_id AND lab.is_preferred = 1
+                WHERE obj.deleted = 0
+                AND UPPER(idno) NOT LIKE 'ZM_%'
+                AND obj.object_id NOT IN (SELECT object_id FROM ca_objects_x_collections)
+                ORDER BY obj.object_id
+            </sql>
+            <columns>Object_id,Idno,Object_naam</columns>
+            <total_columns></total_columns>
+            <charting>none</charting>
+            <charting_columns>Object_id,Idno,Object_naam</charting_columns>
+        </statistic>
+    </statistics_group>
+</statistics>

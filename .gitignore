@@ -1,0 +1,15 @@
+/nbproject/*
+app/tmp/*
+app/conf/local/*
+setup.php
+/media/*
+app/conf/search.conf
+app/conf/app.conf
+!/media/.htaccess
+!/media/README.md
+.DS_Store
+.settings
+.project
+/import/*
+app/lib/core/Parsers/htmlpurifier/standalone/HTMLPurifier/DefinitionCache/Serializer/*
+app/lib/core/Parsers/htmlpurifier/standalone/HTMLPurifier/DefinitionCache/Serializer/HTML

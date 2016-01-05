@@ -1,0 +1,47 @@
+php_value display_errors 0
+php_value memory_limit 1024M
+php_value max_execution_time 604800
+
+# toegevoegd door Sam. http_client verstuurde geen UTF-8
+AddCharset UTF-8 .json
+
+# toevoegt door Sam om cache te testen (javascript en json uit de cache gehaald)
+<IfModule mod_expires.c>
+  <FilesMatch "\.(css|ico|gif|png|jpg|JPG|eot|woff)$">
+       ExpiresActive on
+       ExpiresDefault "access plus 10 day"
+       Header set Cache-Control "max-age=604800, public"
+       Header unset ETag
+   </FilesMatch>
+   #<FilesMatch "\.(js|json)$">
+   #    ExpiresActive on
+   #    ExpiresDefault "access plus 1 day"
+   #    Header set Cache-Control "max-age=86400, no-cache, must-revalidate"
+   #    Header unset ETag
+   #</FilesMatch>
+</IfModule>
+#<IfModule mod_expires.c>
+#  ExpiresActive on
+#  ExpiresByType application/json "access plus 1 day"
+#  ExpiresByType text/javascript "access plus 1 day"
+#  Header set Cache-Control "max-age=86400, no-cache, must-revalidate"
+#  Header unset ETag
+#</IfModule>
+
+<IfModule mod_deflate.c>
+		# application/x-javascript application/json application/javascript text/javascript text/x-js  verwijderd
+                AddOutputFilterByType DEFLATE text/css text/x-component text/html text/richtext image/svg+xml text/plain text/xsd text/xsl text/xml image/x-icon
+        <IfModule mod_mime.c>
+                # DEFLATE by extension
+                # js json verwijderd
+                AddOutputFilter DEFLATE  css htm html xml
+        </IfModule>
+</IfModule>
+
+# Sam toegevoegd (opgelet set moet gebruikt worden ipv append om problemen met
+# gzip te vermijden
+<IfModule mod_headers.c>
+  <FilesMatch "\.(js|json|css|xml|gz)$">
+    Header set Vary Accept-Encoding
+  </FilesMatch>
+</IfModule>
