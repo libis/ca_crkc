@@ -772,9 +772,9 @@
                         $vo_html2pdf->setDefaultFont($vs_font);
                         $vo_html2pdf->setTestIsImage(false);
                         $vo_html2pdf->WriteHTML($vs_content);
-                        $fp = fopen('/www/libis/web/lias_html/collectiveaccess/crkc_media/htmlout_thumb.txt', 'w');
+                        /*$fp = fopen('/www/libis/web/lias_html/collectiveaccess/crkc_media/htmlout_thumb.txt', 'w');
                         fwrite($fp, $vs_content);
-                        fclose($fp);
+                        fclose($fp);*/
 
                         header("Content-Disposition: attachment; filename=".$vs_filename);
                         header("Content-type: application/pdf");
@@ -830,16 +830,16 @@
                     $this->queuingRequest($vs_content, $vs_header, $va_settings, $va_pdf_options);
                     header('Location: ' . $_SERVER['HTTP_REFERER']);
                      // toegevoegd door Sam
-                    $fp = fopen('/www/libis/web/lias_html/collectiveaccess/crkc_media/htmlout_all.txt', 'w');
+                    /*$fp = fopen('/www/libis/web/lias_html/collectiveaccess/crkc_media/htmlout_all.txt', 'w');
                     fwrite($fp, $vs_content);
-                    fclose($fp);
+                    fclose($fp);*/
                     return;
                 }
                 else{
                     // toegevoegd door Sam
-                    $fp = fopen('/www/libis/web/lias_html/collectiveaccess/crkc_media/htmlout_all.txt', 'w');
+                    /*$fp = fopen('/www/libis/web/lias_html/collectiveaccess/crkc_media/htmlout_all.txt', 'w');
                     fwrite($fp, $vs_content);
-                    fclose($fp);
+                    fclose($fp);*/
                     ini_set('memory_limit','2048M');
                     set_time_limit(600000);
 
@@ -897,16 +897,16 @@
                     $this->queuingRequest($vs_content, $vs_header, $va_settings, $va_pdf_options);
 
                     header('Location: ' . $_SERVER['HTTP_REFERER']);
-                    $fp = fopen('/www/libis/web/lias_html/collectiveaccess/crkc_media/htmlout.txt', 'w');
+                    /*$fp = fopen('/www/libis/web/lias_html/collectiveaccess/crkc_media/htmlout.txt', 'w');
                     fwrite($fp, $vs_content);
-                    fclose($fp);
+                    fclose($fp);*/
                     return;
                 }
                 else{
                     // toegevoegd door Sam
-                    $fp = fopen('/www/libis/web/lias_html/collectiveaccess/crkc_media/htmlout.txt', 'w');
+                    /*$fp = fopen('/www/libis/web/lias_html/collectiveaccess/crkc_media/htmlout.txt', 'w');
                     fwrite($fp, $vs_content);
-                    fclose($fp);
+                    fclose($fp);*/
                     ini_set('memory_limit','2048M');
                     set_time_limit(600000);
                     $o_pdf = new DOMPDF();
