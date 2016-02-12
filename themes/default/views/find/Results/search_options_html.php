@@ -66,7 +66,7 @@
         $sortable_items_1 = array();
         $vs_table_name = $vo_result_context->tableName();
 
-        $vs_type_id = $vo_result_context->getTypeRestriction();
+        $vs_type_id = $vo_result_context->getTypeRestriction($vb_type_restriction_has_changed);
         $type_restrictions = ca_metadata_elements::getTypeRestrictionsAsList();
 
         $va_sortable_elements = ca_metadata_elements::getSortableElements($vs_table_name);
@@ -76,6 +76,10 @@
             //i.e. select elements: 1) whose type_id is the current type_id, 2) elements with wild card type_id.
             if(isset($vs_type_id)){
                 $element_type_restrictions = $type_restrictions[$va_sortable_element['element_code']];
+
+				if(empty($element_type_restrictions) || !is_array($element_type_restrictions))
+				   continue;				
+				
                 foreach($element_type_restrictions as $value){
                     if(is_array($value)){
                         foreach($value as $key => $temp_value){
