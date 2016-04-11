@@ -34,8 +34,8 @@
             <total_columns>operation</total_columns>
             <charting>column</charting>
             <charting_columns>month,operation</charting_columns>
-        </statistic>
-        <statistic>
+        </statistic> 
+   <!-- <statistic>
             <id>20</id>
             <title>Object creation in 2013</title>
             <comment></comment>
@@ -47,14 +47,15 @@
             <total_columns>objectid</total_columns>
             <charting>pie</charting>
             <charting_columns>objectid</charting_columns>
-        </statistic>
+        </statistic> -->
         <statistic>
-            <id>21</id>
-            <title>Number of Objects created in 2013</title>
+            <id>22</id>
+            <title>Number of Objects created in 2014</title>
             <comment></comment>
-            <sql>SELECT count(distinct ccls.subject_row_id) as numberofobjects FROM ca_change_log_subjects ccls ,
-                ca_change_log ccl WHERE ccls.log_id = ccl.log_id and ccls.`subject_table_num` = 57 AND
-                year(FROM_UNIXTIME(ccl.log_datetime)) = 2013 and ccl.changetype = 'I'
+            <sql>SELECT count(distinct ccl.logged_row_id) as numberofobjects FROM ca_change_log ccl 
+            inner join ca_objects as obj on ccl.logged_row_id = obj.object_id 
+            WHERE ccl.logged_table_num = 57 AND obj.deleted = 0 and 
+            year(FROM_UNIXTIME(ccl.log_datetime)) = 2014 and ccl.changetype = 'I'
             </sql>
             <columns>numberofobjects</columns>
             <total_columns>numberofobjects</total_columns>
@@ -62,8 +63,81 @@
             <charting_columns>month,operation</charting_columns>
         </statistic>
         <statistic>
-            <id>22</id>
-            <title>verwerving ingevuld</title>
+            <id>23</id>
+            <title>Number of Objects created in 2015</title>
+            <comment></comment>
+            <sql>SELECT count(distinct ccl.logged_row_id) as numberofobjects FROM ca_change_log ccl                 
+            inner join ca_objects as obj on ccl.logged_row_id = obj.object_id
+            WHERE ccl.logged_table_num = 57 AND obj.deleted = 0 and       
+            year(FROM_UNIXTIME(ccl.log_datetime)) = 2015 and ccl.changetype = 'I'
+            </sql>
+            <columns>numberofobjects</columns>
+            <total_columns>numberofobjects</total_columns>
+            <charting>column</charting>
+            <charting_columns>month,operation</charting_columns>
+        </statistic>
+        <statistic>
+            <id>24</id>
+            <title>Number of Objects created in 2016</title>
+            <comment></comment>
+            <sql>SELECT count(distinct ccl.logged_row_id) as numberofobjects FROM ca_change_log ccl                 
+            inner join ca_objects as obj on ccl.logged_row_id = obj.object_id
+            WHERE ccl.logged_table_num = 57 AND obj.deleted = 0 and       
+            year(FROM_UNIXTIME(ccl.log_datetime)) = 2016 and ccl.changetype = 'I'
+            </sql>
+            <columns>numberofobjects</columns>
+            <total_columns>numberofobjects</total_columns>
+            <charting>column</charting>
+            <charting_columns>month,operation</charting_columns>
+        </statistic>
+        <statistic>
+            <id>25</id>
+            <title>Number of Objects created in 2014 (gegroepeerd)</title>
+            <comment></comment>
+            <sql>SELECT substr(obj.idno,1,3) as groep, count(distinct ccl.logged_row_id) as aantal FROM ca_change_log ccl 
+            inner join ca_objects as obj on ccl.logged_row_id = obj.object_id 
+            WHERE ccl.logged_table_num = 57 AND obj.deleted = 0 and 
+            year(FROM_UNIXTIME(ccl.log_datetime)) = 2014 and ccl.changetype = 'I'
+            group by groep
+            </sql>
+            <columns>groep,aantal</columns>
+            <total_columns>aantal</total_columns>
+            <charting>column</charting>
+            <charting_columns>month,operation</charting_columns>
+        </statistic>
+        <statistic>
+            <id>26</id>
+            <title>Number of Objects created in 2015 (gegroepeerd)</title>
+            <comment></comment>
+            <sql>SELECT substr(obj.idno,1,3) as groep, count(distinct ccl.logged_row_id) as aantal FROM ca_change_log ccl                 
+            inner join ca_objects as obj on ccl.logged_row_id = obj.object_id       
+            WHERE ccl.logged_table_num = 57 AND obj.deleted = 0 and       
+            year(FROM_UNIXTIME(ccl.log_datetime)) = 2015 and ccl.changetype = 'I'
+            group by groep
+            </sql>
+            <columns>groep,aantal</columns>
+            <total_columns>aantal</total_columns>
+            <charting>column</charting>
+            <charting_columns>month,operation</charting_columns>
+        </statistic>
+        <statistic>
+            <id>27</id>
+            <title>Number of Objects created in 2016 (gegroepeerd)</title>
+            <comment></comment>
+            <sql>SELECT substr(obj.idno,1,3) as groep, count(distinct ccl.logged_row_id) as aantal FROM ca_change_log ccl                 
+            inner join ca_objects as obj on ccl.logged_row_id = obj.object_id       
+            WHERE ccl.logged_table_num = 57 AND obj.deleted = 0 and       
+            year(FROM_UNIXTIME(ccl.log_datetime)) = 2016 and ccl.changetype = 'I'
+            group by groep
+            </sql>
+            <columns>groep,aantal</columns>
+            <total_columns>aantal</total_columns>
+            <charting>column</charting>
+            <charting_columns>month,operation</charting_columns>
+        </statistic>
+        <statistic>
+            <id>28</id>
+            <title>Verwerving ingevuld</title>
             <comment></comment>
             <sql>SELECT obj.object_id id, obj.idno idno, val1.value_longtext1 Instelling, val2.value_longtext1 Persoon,
                 list1.idno Methode,
@@ -93,28 +167,39 @@
             <charting_columns>month,operation</charting_columns>
         </statistic>
         <statistic>
-            <id>23</id>
+            <id>29</id>
             <title>Number of Objects per collection per year (without deleted object)</title>
             <comment></comment>
-            <sql>SELECT cc.idno as Collectie, year(FROM_UNIXTIME(ccl.log_datetime)) as createdate, count(distinct ccls.subject_row_id) as numberofobjects FROM ca_change_log_subjects ccls , ca_change_log ccl, ca_collections cc, ca_objects_x_collections coa, ca_objects co WHERE ccls.log_id = ccl.log_id and ccls.`subject_table_num` = 57 AND ccl.changetype = 'I' and ccls.subject_row_id = coa.object_id and coa.collection_id = cc.collection_id and coa.object_id = co.object_id and co.deleted = 0 group by cc.idno , year(FROM_UNIXTIME(ccl.log_datetime)) 
+            <sql>SELECT cc.idno as collectie, year(FROM_UNIXTIME(ccl.log_datetime)) as createdate, count(distinct ccl.logged_row_id) as numberofobjects 
+            FROM ca_change_log ccl 
+            inner join ca_objects as co on ccl.logged_row_id = co.object_id 
+            inner join ca_objects_x_collections as cao on ccl.logged_row_id = cao.object_id  
+            inner join ca_collections as cc on cc.collection_id = cao.collection_id
+            WHERE ccl.logged_table_num = 57 AND ccl.changetype = 'I' 
+            and co.deleted = 0 group by collectie, createdate
             </sql>
-            <columns>collectie, createdate, numberofobjects</columns>
+            <columns>collectie,createdate,numberofobjects</columns>
             <total_columns>numberofobjects</total_columns>
             <charting>column</charting>
-            <charting_columns>month,operation</charting_columns>
-        </statistic>
+            <charting_columns>numberofobjects</charting_columns>
+        </statistic> 
         <statistic>
-            <id>24</id>
+            <id>30</id>
             <title>Number of Objects per collection (without deleted object)</title>
             <comment></comment>
-            <sql>SELECT cc.idno as Collectie, count(distinct co.idno) as numberofobjects FROM ca_objects co, ca_collections cc, ca_objects_x_collections coa WHERE co.object_id = coa.object_id and coa.collection_id = cc.collection_id and co.deleted = 0 group by cc.idno 
+            <sql>select col.idno Collectie, count(*) numberofobjects
+                 from ca_collections col
+                 inner join ca_objects_x_collections as cao on col.collection_id = cao.collection_id
+                 inner join ca_objects as obj on obj.object_id = cao.object_id
+                 where obj.deleted = 0
+                 group by col.idno
             </sql>
-            <columns>collectie, createdate, numberofobjects</columns>
+            <columns>Collectie,numberofobjects</columns>
             <total_columns>numberofobjects</total_columns>
             <charting>column</charting>
-            <charting_columns>month,operation</charting_columns>
-        </statistic>
-        <statistic>
+            <charting_columns>numberofobjects</charting_columns>
+        </statistic>    
+   <!-- <statistic>
             <id>3</id>
             <title>Object creation by month last year</title>
             <comment></comment>
@@ -127,7 +212,7 @@
             <total_columns>creation</total_columns>
             <charting>column</charting>
             <charting_columns>month,creation</charting_columns>
-        </statistic>
+        </statistic> -->
     </statistics_group>
     <statistics_group>
         <title>Access and status</title>
