@@ -42,7 +42,7 @@ class DigitoolController extends ActionController {
 		global $g_ui_locale_id;
 
 		$ps_query = $this->request->getParameter('q', pString);
-		$vs_base = "http://resolver.lias.be/";
+		$vs_base = "http://resolver.libis.be/";
 		
 		$va_items = array();
 		if (unicode_strlen($ps_query) > 0) {
