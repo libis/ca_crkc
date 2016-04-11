@@ -9,7 +9,7 @@ var viewerWindow;
 		digitooldefaultdata = {
 			defaultSearchText : "Search Digitool ID ... ",
 //			defaultDigitoolBaseUrl : "http://aleph08.libis.kuleuven.be:8881/dtl-cgi",
-			defaultDigitoolBaseUrl : "http://resolver.lias.be",
+			defaultDigitoolBaseUrl : "http://resolver.libis.be",
 			lookupUrl	: "/ca_cag/index.php/lookup/Digitool/Get"
 		};
 		digitooldata = jQuery.extend(digitooldefaultdata, digitooldata);
@@ -27,11 +27,11 @@ var viewerWindow;
 		thumbnail_div = jQuery(digitooldata.digitoolContainer).find('#digitool_thumbnail');
 		thumbnail_div.empty()
 		if (pids){
-            defaultDigitoolUrl = 'http://resolver.lias.be/get_pid?';
+            defaultDigitoolUrl = 'http://resolver.libis.be/';
 			digitoolObjectDate = pids.split('_,_');
 			digitoolObjectPid = digitoolObjectDate[0];
-            digitoolObjectThumb =  defaultDigitoolUrl + 'stream&usagetype=THUMBNAIL&pid=' + digitoolObjectPid;
-            digitoolObjectView = defaultDigitoolUrl + 'view&usagetype=VIEW_MAIN,VIEW&pid=' + digitoolObjectPid;
+            digitoolObjectThumb =  defaultDigitoolUrl + digitoolObjectPid + '/';
+            digitoolObjectView = defaultDigitoolUrl + digitoolObjectPid + '/representation';
 			thumbnail_div.append("<img src='"+ digitoolObjectThumb +"' view='"+digitoolObjectView +"'>");
 		}
 	}
