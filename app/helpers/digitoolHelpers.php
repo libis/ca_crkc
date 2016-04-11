@@ -97,7 +97,7 @@
 	{
 		if (strlen($digitoolPid) > 0) {
 
-            $digitoolUrl = "http://resolver.lias.be/get_pid?stream&usagetype=THUMBNAIL&pid=".$digitoolPid;
+            $digitoolUrl = "http://resolver.libis.be/".$digitoolPid."/";
 			
 			return $digitoolUrl;
 		}
@@ -110,7 +110,7 @@
     {
         if (strlen($digitoolPid) > 0) {
 
-            $digitoolUrl = "http://resolver.lias.be/get_pid?view&usagetype=VIEW_MAIN,VIEWL&pid=".$digitoolPid;
+            $digitoolUrl = "http://resolver.libis.be/".$digitoolPid."/representation";
 
             return $digitoolUrl;
 
@@ -147,4 +147,3 @@
     }
 
 ?>
-

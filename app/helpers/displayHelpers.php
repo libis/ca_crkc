@@ -1291,8 +1291,9 @@ require_once(__CA_LIB_DIR__.'/core/Parsers/ganon.php');
                     foreach ($digitoolPids as $digitoolPid) {
                             //width:'100%',
                         $digitoolThumbnail = getDigitoolThumbnailUrl($digitoolPid);
-                        
-                        array_push($va_imgs, "{url:'".$digitoolThumbnail."', height:'100%', link: '#'}");
+                        $digitoolFull = getDigitoolViewMainUrl($digitoolPid) . '" target="_blank';
+
+                        array_push($va_imgs, "{url:'".$digitoolThumbnail."', height:'100%', link: '" . $digitoolFull . "'}");
                     }
                 }
 				//libis_end
@@ -2708,7 +2709,7 @@ require_once(__CA_LIB_DIR__.'/core/Parsers/ganon.php');
 		$va_tmp = $po_rep->getMediaInfo('media', $ps_version);
 		$va_dimensions = array();
 			if (isset($va_tmp['WIDTH']) && isset($va_tmp['HEIGHT'])) {
-			if (($vn_w = $va_tmp['WIDTH']) && ($vn_h = $va_tmp['WIDTH'])) {
+			if (($vn_w = $va_tmp['WIDTH']) && ($vn_h = $va_tmp['HEIGHT'])) {
 				$va_dimensions[] = $va_tmp['WIDTH'].'p x '.$va_tmp['HEIGHT'].'p';
 			}
 		}
