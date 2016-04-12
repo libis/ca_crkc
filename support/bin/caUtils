@@ -1,7 +1,7 @@
 #!/usr/bin/env php
 <?php
 
-        $home_directory = '/www/libis/web/lias_html/ca_crkc';
+        $home_directory = '/libis/CA/production/collectiveaccess/ca_crkc';
         $_SERVER['SCRIPT_FILENAME'] = $home_directory .'/index.php';
         putenv('COLLECTIVEACCESS_HOME='. $home_directory);
         $AUTH_CURRENT_USER_ID = 'administrator';
