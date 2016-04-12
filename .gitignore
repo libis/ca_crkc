@@ -3,7 +3,6 @@ app/tmp/*
 app/conf/local/*
 setup.php
 /media/*
-app/conf/search.conf
 .DS_Store
 .settings
 .project
