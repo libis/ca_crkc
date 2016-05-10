@@ -53,13 +53,15 @@
 				<div id="systemTitle">
 					<?php print $this->request->config->get("app_display_name"); ?><br/><br/>
 <!--Begin added Anita -->
+<!--libis_start (we planned to comment and keep this message for future use
                     <div class="loginFormMessage">
-                        <?php print "Beste gebruiker uit provincie Antwerpen, "; ?><br/>
-                        <?php print "In het kader van het nieuwe erfgoedbeheersysteem, wordt het invoeren in de databank per 1 maart 2015 geblokkeerd. "; ?><br/>
-                        <?php print "Raadpleging blijft mogelijk. "; ?><br/>
-                        <?php print "Voor meer informatie: "; ?><a href="mailto:marc.mees@provincieantwerpen.be">marc.mees@provincieantwerpen.be</a><br/>
-                        <?php print "of 03 240 64 21."; ?><br/>
+                        <?php /*print "Beste gebruiker uit provincie Antwerpen, "; */?><br/>
+                        <?php /*print "In het kader van het nieuwe erfgoedbeheersysteem, wordt het invoeren in de databank per 1 maart 2015 geblokkeerd. "; */?><br/>
+                        <?php /*print "Raadpleging blijft mogelijk. "; */?><br/>
+                        <?php /*print "Voor meer informatie: "; */?><a href="mailto:marc.mees@provincieantwerpen.be">marc.mees@provincieantwerpen.be</a><br/>
+                        <?php /*print "of 03 240 64 21."; */?><br/>
                     </div>
+libis_end-->
 <!--End added Anita -->
 							
 <?php 

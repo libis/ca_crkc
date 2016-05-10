@@ -211,10 +211,13 @@
 
 			JavascriptLoadManager::register('digitool');			
 			$vs_element = 	'<div id="digitoolContainer_'.$pa_element_info['element_id'].'_{n}" class="digitoolContainer">';
+/*
 			$vs_element .= 		'<div class="digitoolSearchBox" style="border-bottom: 1px solid #E6E6E6; padding-bottom:0.5em;  margin-bottom:0.5em;">';
 			$vs_element .=			'<input type="text" class="digitoolSearchField" name="digitoolSearchField_{n}" size="60" value="'._t('PID van het originele item').'" autocomplete="off"/ style="margin: 0 10px 0 0;">';
 			$vs_element .=			'<a href="#" class="button" id="searchDigitoolButton">'._t('Search Digitool').' &rsaquo;</a>';			
 			$vs_element .= 		'</div>';			
+*
+*/
 			$vs_element .= 		'<div id="digitool_search_thumbnails">';
 			$vs_element .= 		'</div>';						
 

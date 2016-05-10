@@ -7,7 +7,7 @@
 		$thumbnailUrl = getDigitoolThumbnailUrl($digitoolPid);
 
 		if (strlen($thumbnailUrl) > 0) {			
-			return '<img src="'.$thumbnailUrl.'" style="max-height: 500px;">';					
+			return '<img src="'.$thumbnailUrl.'" style="max-height: 300px; max-width: 200px">';
 		}
 
 		return "";
