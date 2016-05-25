@@ -97,7 +97,7 @@
 	{
 		if (strlen($digitoolPid) > 0) {
 
-            $digitoolUrl = "http://resolver.libis.be/".$digitoolPid."/";
+            $digitoolUrl = "http://resolver.libis.be/".$digitoolPid."?quality=CRITICAL_ARCHIVE";
 			
 			return $digitoolUrl;
 		}
