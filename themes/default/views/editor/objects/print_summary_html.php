@@ -39,7 +39,7 @@ $va_placements = $this->getVar("placements");
     <!-- activeren van utf-8 -->
     <meta http-equiv="Content-Type" content="charset=utf-8" />
     <style type="text/css">
-        #pageHeader { background-color: #81a43b; padding: 3px 5px 2px 10px; height: 75px;width: 190mm; position: fixed;top:0;}
+        #pageHeader { background-color: #81a43b; padding: 3px 5px 2px 10px; height: 75px;width: 190mm; position: absolute;top:0;}
         .headerText { color: #FFFFFF; margin: 0px 0px 10px 25px; float:right;}
         h1 { font-family:Verdana, Arial,Helvetica,"DejaVu Sans",sans-serif;font-size:14px;}
         span.label {font-weight: bold; text-align: left;}
@@ -52,9 +52,7 @@ $va_placements = $this->getVar("placements");
             font-family:Helvetica,"DejaVu Sans",sans-serif;
             font-size: 10px;
             vertical-align: text-top;
-            width: 100mm;
-            border-bottom-style:solid;
-            border-bottom-width: 1px;
+            width: 95mm;
             padding-bottom: 2mm;
         }
         .image {
@@ -64,8 +62,6 @@ $va_placements = $this->getVar("placements");
             text-align: center;
             width: 50mm;
             padding: 0.5mm;
-            border-bottom-style:solid;
-            border-bottom-width: 1px;
         }
         .image > img { max-height: 50mm; max-width: 50mm;}
     </style>
@@ -184,6 +180,41 @@ if($this->request->config->get('summary_footer_enabled')) {
                 print "<strong class=\"label\">".$va_bundle_info['display'].":</strong><span class='value'>".$vs_display_value."</span><br/>\n";
             }
             ?>
-        </div></div></div>
+        <!--</div></div></div>-->
+<!--libis start-->
+        </div></div>
+<?php
+
+    $pids = $digitoolPids;
+    array_shift($pids);
+    $pids = array_reverse($pids);
+    $totalDivs = ceil(sizeof($pids)/3);
+    if($totalDivs > 0){
+        for($x = 0; $x<$totalDivs; $x++){?>
+            <div class='odd'>
+                <?php
+                for($y=0; $y < 3; $y++) {
+                    $pid = array_pop($pids);
+                    if(empty($pid))
+                        continue;
+                    ?>
+                    <div class="image">
+                        <?php
+                        $vs_buf = "";
+                        $vs_buf .= getDigitoolThumbnailBase($pid);
+
+                        print $vs_buf;
+                        ?>
+                    </div>
+                    <?php
+                }
+                ?>
+            </div>
+        <?php }
+    }
+
+?>
+<!--libis end-->
+</div>
 </body>
 </html>
