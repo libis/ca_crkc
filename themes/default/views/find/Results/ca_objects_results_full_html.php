@@ -59,15 +59,32 @@
                 $t_object->load($vn_object_id);
               
                 $digitoolPids = getDigitoolPids($t_object->get('digitoolUrl', array('returnAsArray' => true)));
+				
+                //libis_start
+                // in search results show image representation if digitool image is not available
+                if (is_array($digitoolPids) && sizeof($digitoolPids) > 0) {
+                        $media_representation .= getDigitoolThumbnailLink($digitoolPids[0]);
+                        $va_tmp = array();
+                        print caEditorLink($this->request, array_shift($va_tmp), '', 'ca_objects', $vn_object_id, array(), array('onmouseover' => 'jQuery(".qlButtonContainerFull").css("display", "none"); jQuery("#ql_'.$vn_object_id.'").css("display", "block");', 'onmouseout' => 'jQuery(".qlButtonContainerFull").css("display", "none");'));
+                        print $media_representation;
+                }
+                else{
+                        $va_tmp = $vo_result->getMediaTags('ca_object_representations.media', 'small');
+                        print caEditorLink($this->request, array_shift($va_tmp), '', 'ca_objects', $vn_object_id, array(), array('onmouseover' => 'jQuery(".qlButtonContainerFull").css("display", "none"); jQuery("#ql_'.$vn_object_id.'").css("display", "block");', 'onmouseout' => 'jQuery(".qlButtonContainerFull").css("display", "none");'));
+                        print "<div class='qlButtonContainerFull' id='ql_".$vn_object_id."' onmouseover='jQuery(\"#ql_".$vn_object_id."\").css(\"display\", \"block\");'><a class='qlButton' onclick='caMediaPanel.showPanel(\"".caNavUrl($this->request, 'find', 'SearchObjects', 'QuickLook', array('object_id' => $vn_object_id))."\"); return false;' >Quick Look</a></div>"; //libis uitgeschakeld gaf exception, moet eens bekeken worden
+                }
+                //libis_end
+				
 
-                if (sizeof($digitoolPids) > 0) {
+/*                if (sizeof($digitoolPids) > 0) {
                     $media_representation .= getDigitoolThumbnailLink($digitoolPids[0]);
-}
+}*/
     	//$va_tmp = $vo_result->getMediaTags('ca_object_representations.media', 'small');
-		$va_tmp = array();
+/*		$va_tmp = array();
 		
 		print caEditorLink($this->request, array_shift($va_tmp), '', 'ca_objects', $vn_object_id, array(), array('onmouseover' => 'jQuery(".qlButtonContainerFull").css("display", "none"); jQuery("#ql_'.$vn_object_id.'").css("display", "block");', 'onmouseout' => 'jQuery(".qlButtonContainerFull").css("display", "none");'));
 		print $media_representation;
+*/		
 		//print "<div class='qlButtonContainerFull' id='ql_".$vn_object_id."' onmouseover='jQuery(\"#ql_".$vn_object_id."\").css(\"display\", \"block\");'><a class='qlButton' onclick='caMediaPanel.showPanel(\"".caNavUrl($this->request, 'find', 'SearchObjects', 'QuickLook', array('object_id' => $vn_object_id))."\"); return false;' >Quick Look</a></div>"; //libis uitgeschakeld gaf exception, moet eens bekeken worden
 		
 		print "</div>";
