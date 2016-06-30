@@ -1277,7 +1277,7 @@ require_once(__CA_LIB_DIR__.'/core/Parsers/ganon.php');
 					<div id='inspectorMedia' style='background-color:#f9f9f9; border: 1px solid #eee; margin:3px 0px -3px 0px;'>";
 			
 			    // Extra if toegevoegd //libis
-			    if(!empty($va_reps))
+			    /*if(!empty($va_reps))
 			    {
 				    foreach($va_reps as $va_rep) {
 					    if (!($va_rep['info']['preview170']['WIDTH'] && $va_rep['info']['preview170']['HEIGHT'])) { continue; }
@@ -1285,7 +1285,7 @@ require_once(__CA_LIB_DIR__.'/core/Parsers/ganon.php');
 					        $va_rep['info']['preview170']['HEIGHT'].", link: '#', onclick:  'caMediaPanel.showPanel(\'".
 					        caNavUrl($po_view->request, 'editor/objects', 'ObjectEditor', 'GetRepresentationInfo', array('object_id' => ($vs_table_name == 'ca_objects') ? $vn_item_id : 0, 'representation_id' => $va_rep['representation_id']))."\')'}";
 				        }
-				}
+				}*/
 				//libis_start
 				if (isset($digitoolPids) && (is_array($digitoolPids)) && (sizeof($digitoolPids) > 0)) {
                     foreach ($digitoolPids as $digitoolPid) {
@@ -1295,7 +1295,15 @@ require_once(__CA_LIB_DIR__.'/core/Parsers/ganon.php');
 
                         array_push($va_imgs, "{url:'".$digitoolThumbnail."', height:'100%', link: '" . $digitoolFull . "'}");
                     }
-                }
+                }elseif(!empty($va_reps)){ // show image representation if digitool image does not exist
+
+					foreach($va_reps as $va_rep) {
+						if (!($va_rep['info']['preview170']['WIDTH'] && $va_rep['info']['preview170']['HEIGHT'])) { continue; }
+						$va_imgs[] = "{url:'".$va_rep['urls']['preview170']."', width: ".$va_rep['info']['preview170']['WIDTH'].", height: ".
+							$va_rep['info']['preview170']['HEIGHT'].", link: '#', onclick:  'caMediaPanel.showPanel(\'".
+							caNavUrl($po_view->request, 'editor/objects', 'ObjectEditor', 'GetRepresentationInfo', array('object_id' => ($vs_table_name == 'ca_objects') ? $vn_item_id : 0, 'representation_id' => $va_rep['representation_id']))."\')'}";
+					}
+				}
 				//libis_end
 				
 				if (sizeof($va_imgs) > 0) {
