@@ -91,6 +91,36 @@
             <charting_columns>month,operation</charting_columns>
         </statistic>
         <statistic>
+            <id>31</id>
+            <title>Number of Objects created in 2017</title>
+            <comment></comment>
+            <sql>SELECT count(distinct ccls.subject_row_id) as numberofobjects
+            FROM ca_change_log_subjects ccls, ca_change_log ccl, ca_objects obj
+            WHERE ccls.log_id = ccl.log_id and ccls.subject_row_id = obj.object_id and
+            ccl.logged_table_num in (50, 57) AND obj.deleted = 0 and
+            year(FROM_UNIXTIME(ccl.log_datetime)) = 2017 and ccl.changetype = 'I'
+            </sql>
+            <columns>numberofobjects</columns>
+            <total_columns>numberofobjects</total_columns>
+            <charting>column</charting>
+            <charting_columns>month,operation</charting_columns>
+        </statistic>
+        <statistic>
+            <id>32</id>
+            <title>Number of Objects created in 2018</title>
+            <comment></comment>
+            <sql>SELECT count(distinct ccls.subject_row_id) as numberofobjects
+            FROM ca_change_log_subjects ccls, ca_change_log ccl, ca_objects obj
+            WHERE ccls.log_id = ccl.log_id and ccls.subject_row_id = obj.object_id and
+            ccl.logged_table_num in (50, 57) AND obj.deleted = 0 and
+            year(FROM_UNIXTIME(ccl.log_datetime)) = 2018 and ccl.changetype = 'I'
+            </sql>
+            <columns>numberofobjects</columns>
+            <total_columns>numberofobjects</total_columns>
+            <charting>column</charting>
+            <charting_columns>month,operation</charting_columns>
+        </statistic>				
+        <statistic>
             <id>25</id>
             <title>Number of Objects created in 2014 (gegroepeerd)</title>
             <comment></comment>
