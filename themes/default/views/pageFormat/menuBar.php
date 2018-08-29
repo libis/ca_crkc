@@ -37,8 +37,8 @@
 <?php
 			}
 ?>
-			<a href="/ca_crkc/themes/default/graphics/handleiding_nieuwe_CRKCdatabank_redacteurs.pdf" target="_blank" style="float:left; color:black; padding-right: 50px">Handleiding</a>
-			<a href="/ca_crkc/themes/default/graphics/Handleiding_vraag_aanbod_2016_web.pdf" target="_blank" style="float:left; color:black;">Handleiding Vraag & Aanbod</a>
+			<a href="/ca_crkc/themes/default/graphics/2018_H_redacteur.pdf" target="_blank" style="float:left; color:black; padding-right: 50px">Handleiding</a>
+			<a href="/ca_crkc/themes/default/graphics/2018_Handleiding_vraag_aanbod_web.pdf" target="_blank" style="float:left; color:black;">Handleiding Vraag & Aanbod</a>
 			<ul class="sf-menu" style="background-color:#<?php print $va_menu_color; ?>;">
 	<?php
 			print $va_menu_bar = $this->getVar('nav')->getHTMLMenuBar('menuBar', $this->request);
